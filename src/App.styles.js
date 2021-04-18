@@ -31,7 +31,17 @@ const styles = (theme) => ({
   },
   mainFeaturesPostContent: {
     position: 'relative',
-    padding: theme.spacing(9),
+    padding: theme.spacing(6),
+    marginTop: theme.spacing(8),
+  },
+  cardMedia: {
+    paddingTop: '56.25%',
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+  cardGrid: {
+    marginTop: theme.spacing(4),
   },
 });
 

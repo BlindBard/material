@@ -9,12 +9,33 @@ import {
   Box,
   Paper,
   Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  BottomNavigation,
+  BottomNavigationAction,
 } from '@material-ui/core';
+
 import MenuIcon from '@material-ui/icons/Menu';
+import FolderIcon from '@material-ui/icons/Folder';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+
 import useStyles from './App.styles';
+import LayerIcon from '@material-ui/icons/Layers';
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function App() {
   const classes = useStyles();
+  const [value, setValue] = React.useState('recents');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <>
@@ -74,7 +95,118 @@ function App() {
             </Grid>
           </Container>
         </Paper>
+        <div className={classes.mainContent}>
+          <Container maxWidth="md">
+            <Typography
+              vatiant="h2"
+              align="center"
+              color="textPrimary"
+              gutterBottom
+            >
+              Some text
+            </Typography>
+            <Typography
+              vatiant="h5"
+              align="center"
+              color="textSecondary"
+              paragraph
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </Typography>
+            <div className={classes.mainButtons}>
+              <Grid container spacing={5} justify="center">
+                <Grid item>
+                  <Button variant="contained" color="primary">
+                    Start Now
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button variant="outlined" color="primary">
+                    Learn More
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+          </Container>
+        </div>
+        <Container className={classes.cardGrid} maxWidth="md">
+          <Grid container spacing={4}>
+            {cards.map((card) => (
+              <Grid item key={card} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image="https://source.unsplash.com/random"
+                    title="Image title"
+                  />
+                  <CardContent className={classes.CardContent}>
+                    <Typography variant="h5" gutterBottom>
+                      Blog post
+                    </Typography>
+                    <Typography>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      View
+                    </Button>
+                    <Button size="small" color="primary">
+                      Edit
+                    </Button>
+                    <LayerIcon />
+                    <PlayCircleFilledIcon />
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
       </main>
+      <footer>
+        <Typography variant="h6" align="center" gutterBottom>
+          Footer
+        </Typography>
+        <BottomNavigation
+          value={value}
+          onChange={handleChange}
+          className={classes.root}
+        >
+          <BottomNavigationAction
+            label="Recents"
+            value="recebts"
+            icon={<RestoreIcon />}
+          />
+          <BottomNavigationAction
+            label="Favorites"
+            value="favorites"
+            icon={<FavoriteIcon />}
+          />
+          <BottomNavigationAction
+            label="Nearby"
+            value="nearby"
+            icon={<LocationOnIcon />}
+          />
+          <BottomNavigationAction
+            label="Folder"
+            value="folder"
+            icon={<FolderIcon />}
+          />
+        </BottomNavigation>
+        <Typography
+          variant="subtitle1"
+          component="p"
+          align="center"
+          color="textSecondary"
+        >
+          React Material UI
+        </Typography>
+      </footer>
     </>
   );
 }
