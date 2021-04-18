@@ -15,6 +15,12 @@ import {
   CardActions,
   BottomNavigation,
   BottomNavigationAction,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  TextField,
+  DialogActions,
 } from '@material-ui/core';
 
 import MenuIcon from '@material-ui/icons/Menu';
@@ -37,6 +43,16 @@ function App() {
     setValue(newValue);
   };
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <AppBar position="fixed">
@@ -54,9 +70,47 @@ function App() {
               Logo
             </Typography>
             <Box mr={3}>
-              <Button color="inherit" variant="outlined">
+              <Button
+                color="inherit"
+                variant="outlined"
+                onClick={handleClickOpen}
+              >
                 Log In
               </Button>
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle id="form-dialog-title">Log In</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>Log in to see videos</DialogContentText>
+                  <TextField
+                    id="name"
+                    label="Email Address"
+                    type="email"
+                    autoFocus
+                    fullWidth
+                    margin="dense"
+                  />
+                  <TextField
+                    id="password"
+                    label="Password"
+                    type="password"
+                    autoFocus
+                    fullWidth
+                    margin="dense"
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color="primary">
+                    Cancel
+                  </Button>
+                  <Button onClick={handleClose} color="primary">
+                    Log In
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </Box>
             <Button color="secondary" variant="contained">
               Sign Up
